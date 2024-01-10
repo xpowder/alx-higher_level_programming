@@ -1,25 +1,20 @@
-
-n - Input/Output, task 15. Search and update"""
+#!/usr/bin/python3
+"""Defines a text file insertion function."""
 
 
 def append_after(filename="", search_string="", new_string=""):
-    """Inserts a line of text to a file, after each line containing a specific
-    string.
+    """Insert text after each line containing a given string in a file.
 
     Args:
-        filename (str): file to search
-        search_string (str): search term
-        new_string (str): line to insert into file after line containing match
-
+        filename (str): The name of the file.
+        search_string (str): The string to search for within the file.
+        new_string (str): The string to insert.
     """
-    with open(filename, 'r+', encoding='utf-8') as curr_file:
-        lines = curr_file.readlines()
-        curr_file.seek(0)
-        for i, line in enumerate(lines):
-            #            print("read:   {}".format(line), end='')
+    text = ""
+    with open(filename) as r:
+        for line in r:
+            text += line
             if search_string in line:
-                lines[i] = line + new_string
-                #                print("modded: {}".format(line), end='')
-#        for line in lines:
-#            print(line, end="")
-        curr_file.writelines(lines)
+                text += new_string
+    with open(filename, "w") as w:
+        w.write(text)
